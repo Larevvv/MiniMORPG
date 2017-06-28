@@ -3,7 +3,7 @@
 ### Idea
 
 Plan is to make very simple RPG world.
-Mechanics are like to sides of a coin. Other side focuses on crafting, and other side focuses on combat.
+Mechanics are like two sides of a coin. Other side focuses on crafting, and other side focuses on combat.
 
 Good weapons can only be crafted and thats where players need crafting.
 But on the other hand, only some materials can be harvested via combat.
