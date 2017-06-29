@@ -1,6 +1,11 @@
 # MiniMORPG
 
-### Idea
+## Dependencies
+
+- NodeJs 6.10.0
+- NPM 3.9.5
+
+## Idea
 
 Plan is to make very simple RPG world.
 Mechanics are like two sides of a coin. Other side focuses on crafting, and other side focuses on combat.
@@ -43,5 +48,44 @@ World will mostly be harvestable, but there is a limit on how much you can harve
 We think that this feature will make the player switch places and get them explore the world more.
 
 World will also contain Dungeons where Players who are interested in combat can challenge themselves in order to get new loot. Dungeon delving is an importan feature for crafters, because it contains materials that people are unable to get their hands on otherwise
+
+## Data formats
+*These formats are going to be changed*
+
+### Player
+```json
+
+    {
+        "id": "XXXX-XXXX-XXXX-XXXX",
+        "name": "Player Name",
+        "instanceId": "123",
+        "position": {
+            "x":0,
+            "y":0
+        },
+        "inventory": [],
+        "equips": {
+            "weapon1": null,
+            "weapon2" : null,
+            "armor": null,
+        }
+    }
+
+```
+
+### Material
+```json
+
+    {
+        "name": "Cool material name",
+        "description": "Lore stuff. Hints on stats",
+        "durability": 1-100,
+        "hardness": 1-100,
+        "density": 1-100,
+        "element": "Element here? Fire? do we even have elements?"
+    }
+
+```
+
 
 ### More to be added...
