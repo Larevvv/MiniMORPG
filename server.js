@@ -5,6 +5,8 @@ const server = app.listen(80);
 const io = require("socket.io").listen(server);
 app.use(express.static("client"));
 
+const version = +new Date();
+
 const PlayerClass = require("./js/Player.js");
 
 const PlayerList = [];
@@ -28,5 +30,8 @@ setInterval(() => {
     PlayerList.forEach(Player => {
         Player.update();
     })
-    io.emit("update", PlayerList);
+    io.emit("update", {
+        PlayerList,
+        version
+    });
 },1000/60); // how fast the game loop is
