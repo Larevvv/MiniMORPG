@@ -23,7 +23,7 @@ document.addEventListener("keyup", event => {
 })
 
 let version = null;
-
+//RPGUI.set_value(document.getElementById("hp-bar"), 0.5);
 socket.on("update", data => {
     if(version !== null && data.version !== version) {
         socket.disconnect();
