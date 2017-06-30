@@ -2,7 +2,6 @@ const socket = io();
 const Players = $("#playerList");
 const PlayerTemplate = $("#Player").clone();
 $("#Player").fadeOut(0);
-console.log(PlayerTemplate);
 
 const keys = {
     "87":{name:"up",value:false},
@@ -25,9 +24,14 @@ document.addEventListener("keyup", event => {
     if(key) keys[event.keyCode].value = false;
 });
 
-socket.on("update", PlayerList => {
+let version = null;
+socket.on("update", data => {
+  if(version !== null && data.version !== version) {
+        socket.disconnect();
+        location.reload();
+    } else {
     Players.find(".player").attr("con",0);
-    PlayerList.forEach(Player => {
+    data.forEach(Player => {
         const cur = Players.find(`#${Player.name}`);
         if(cur.length) {
             // Movement
@@ -37,7 +41,7 @@ socket.on("update", PlayerList => {
 
             // Combat
             if(Player.interact && Player.target){
-              let target = PlayerList.filter((jsonPlayer) => {
+              let target = data.filter((jsonPlayer) => {
                 return jsonPlayer.name === Player.target;
               })[0];
             if (target) {
@@ -74,4 +78,5 @@ socket.on("update", PlayerList => {
         }
     });
     Players.find("[con=0]").remove();
+    }
 });
