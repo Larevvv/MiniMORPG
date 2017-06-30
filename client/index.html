@@ -14,6 +14,10 @@
                 width: 100vw;
                 height: 100vh;
                 transform: translate(50%,50%);
+                margin: 0;
+            }
+            .playerList {
+                position: absolute;
             }
             .player {
                 position: absolute;
@@ -24,11 +28,26 @@
                 top: 0;
                 left: 0;
             }
+            .rpgui-content {
+                transform: translate(-50%,-50%);
+                z-index: 100;
+            }
+            .health {
+                position: absolute;
+                transform: translate(-50%);
+                left: 50%;
+                bottom: 0;
+
+                width: 300px;
+            }
         </style>
     </head>
     <body>
         <div id="Player" class="player"></div>
         <div id="playerList"></div>
+        <div class="rpgui-content">
+            <div id="hp-bar" class="health rpgui-progress red" data-value="0.5"></div>
+        </div>
     </body>
     <!--
         Scripts here
