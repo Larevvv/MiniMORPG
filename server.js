@@ -19,7 +19,29 @@ io.on("connection", socket => {
     socket.on("keyUpdate", (key, press) => {
         if(press) Player.keyDown(key);
         else Player.keyUp(key);
-    })
+    });
+    socket.on("onClick", (id, button) => {
+        if(button == 1) Player.onClick(id, false);
+        else if (button == 3) Player.onClick(id, true);
+    });
+    socket.on("gameEvent", (gameEvent) => {
+        switch (gameEvent.type) {
+          case "takeDamage":
+            let targetPlayer = PlayerList.filter(playerObject => {
+                return playerObject.name === gameEvent.target.name;
+            })[0];
+            targetPlayer.takeDamage(gameEvent.data);
+            break;
+          case "getHealed":
+
+            break;
+          case "loot":
+
+            break;
+          default:
+
+        }
+    });
     socket.on("disconnect", () => {
         PlayerList.splice(PlayerList.indexOf(Player),1);
     });
