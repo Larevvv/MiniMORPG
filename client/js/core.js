@@ -33,12 +33,15 @@ const render = () => {
                 cur.css("top", Player.pos.y);
                 cur.css("left", Player.pos.x);
                 cur.attr("con", 1);
+                // HP;
+                cur.find(".hp").find(".rpgui-progress-fill").css("width",`${Player.hp/Player.maxHP*100}%`)
             } else {
                 const nplr = PlayerTemplate.clone();
                 nplr.attr("id", Player.id);
                 nplr.css("top", Player.pos.y);
                 nplr.css("left", Player.pos.x);
                 nplr.attr("con", 1);
+                nplr.find(".info").text(Player.name)
                 // Adds a listener to player to be used in player targeting
                 nplr.appendTo(Players);
             }

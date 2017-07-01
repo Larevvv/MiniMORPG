@@ -28,6 +28,36 @@
                 left: 0;
                 z-index: 90;
                 border-style: none;
+                text-align: center;
+            }
+            .player .info {
+                position: absolute;
+                top: -120%;
+                text-align: center;
+                transform: translate(-50%);
+            }
+            .player .hp {
+                position: absolute;
+                top: -75%;
+                height: 16px;
+                width: 64px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .player .hp .edgeleft {
+                height: 100%;
+                width: 10px;
+                left: -10px;
+            }
+            .player .hp .edgeright {
+                height: 100%;
+                width: 10px;
+                right: -10px;
+            }
+            .player .hp .fill {
+                height: 100%;
+                width: 100%;
+                left: 0%;
             }
             #playerList {
                 position: absolute;
@@ -53,9 +83,20 @@
         </style>
     </head>
     <body>
-        <div id="Player" class="player"></div>
+        <div id="Player" class="player">
+            <label class="info">AAAAAAAAAAAAAA</label>
+            <div class="hp rpgui-progress red" data-value="0.5">
+                <div class="rpgui-progress-track fill">
+                    <div class="rpgui-progress-fill red" style="left:0px;width:100%;height:100%;top:0%"></div>
+                </div>
+                <div class="rpgui-progress-left-edge edgeleft"></div>
+                <div class="rpgui-progress-right-edge edgeright"></div>
+            </div>
+        </div>
         <div class="rpgui-content">
-            <div id="playerList"></div>
+            <div id="playerList">
+
+            </div>
             <div id="hp-bar" class="health rpgui-progress red" data-value="0.5"></div>
         </div>
     </body>

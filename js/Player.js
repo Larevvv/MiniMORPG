@@ -39,6 +39,7 @@ class Player {
 
     onClick(target, pos, button) {
         if(target && button === 3) this.target = target;
+        else if(!target && button === 3) this.target = null;
         else if(button === 1) this.tpos = {x:pos.x||this.pos.x,y:pos.y||this.pos.y};
     }
 
