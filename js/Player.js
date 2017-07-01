@@ -5,7 +5,7 @@ class Player {
         this.name = "name";
         //this.instanceId = 0;
 
-        // combat
+        // Combat
         this.maxHP = 100;
         this.hp = 100;
         this.maxMana = 100;
@@ -14,7 +14,7 @@ class Player {
         this.target = "";
 
         // Player stuff. Inventory etc.
-        this.Inventory = {};
+        this.Inventory = [];
         this.equips = {
             weapon1: null,
             weapon2: null,
@@ -26,47 +26,31 @@ class Player {
             x: 0,
             y: 0
         };
+        this.tpos = {
+            x: 0,
+            y: 0
+        };
         this.speed = 5;
-        this.keys = {
-            up: false,
-            down: false,
-            left: false,
-            right: false,
-            space: false
-        }
     }
 
     takeDamage(amount) {
         this.hp -= amount;
     }
 
-    onClick(target, interact) {
-        this.target = target;
-        this.interact = interact;
-    }
-
-    keyDown(key) {
-        this.keys[key] = true;
-        if (this.keys.space) {
-            this.interact = !this.interact;
-        }
-    }
-
-    keyUp(key) {
-        this.keys[key] = false;
+    onClick(target, pos, button) {
+        if(target && button === 3) this.target = target;
+        else if(button === 1) this.tpos = {x:pos.x||this.pos.x,y:pos.y||this.pos.y};
     }
 
     update() {
-        // movement
-        let x = 0,
-            y = 0;
-        if (this.keys.up) y -= 1;
-        if (this.keys.down) y += 1;
-        if (this.keys.right) x += 1;
-        if (this.keys.left) x -= 1;
-        const dist = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-        this.pos.x += (x / dist || 0) * this.speed;
-        this.pos.y += (y / dist || 0) * this.speed;
+        // Movement
+        const dist = Math.sqrt(Math.pow(this.tpos.x-this.pos.x, 2) + Math.pow(this.tpos.y-this.pos.y, 2));
+        this.pos.x += Math.round(((this.tpos.x-this.pos.x) / dist || 0) * this.speed);
+        this.pos.y += Math.round(((this.tpos.y-this.pos.y) / dist || 0) * this.speed);
+        if(dist < 5) {
+            this.tpos.x = this.pos.x;
+            this.tpos.y = this.pos.y;
+        }
     }
 }
 

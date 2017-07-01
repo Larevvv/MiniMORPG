@@ -16,44 +16,22 @@ io.on("connection", socket => {
     console.log("Connected");
     const Player = new PlayerClass(socket.id);
     PlayerList.push(Player);
-    socket.on("keyUpdate", (key, press) => {
-        if (press) Player.keyDown(key);
-        else Player.keyUp(key);
-    });
-    socket.on("onClick", (id, button) => {
-        if (button == 1) Player.onClick(id, false);
-        else if (button == 3) Player.onClick(id, true);
-    });
-    socket.on("gameEvent", (gameEvent) => {
-        switch (gameEvent.type) {
-            case "takeDamage":
-                let targetPlayer = PlayerList.filter(playerObject => {
-                    return playerObject.name === gameEvent.target.name;
-                })[0];
-                targetPlayer.takeDamage(gameEvent.data);
-                break;
-            case "getHealed":
-
-                break;
-            case "loot":
-
-                break;
-            default:
-
-        }
-    });
+    socket.on("onClick", (target, pos, button) => Player.onClick(target, pos, button));
     socket.on("disconnect", () => {
         PlayerList.splice(PlayerList.indexOf(Player), 1);
     });
 });
 
 // Game loop
+let step = 0;
 setInterval(() => {
+    step++;
     PlayerList.forEach(Player => {
         Player.update();
     })
     io.emit("update", {
         PlayerList,
-        version
+        version,
+        step
     });
 }, 1000 / 60); // how fast the game loop is
