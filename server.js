@@ -17,33 +17,33 @@ io.on("connection", socket => {
     const Player = new PlayerClass(socket.id);
     PlayerList.push(Player);
     socket.on("keyUpdate", (key, press) => {
-        if(press) Player.keyDown(key);
+        if (press) Player.keyDown(key);
         else Player.keyUp(key);
     });
     socket.on("onClick", (id, button) => {
-        if(button == 1) Player.onClick(id, false);
+        if (button == 1) Player.onClick(id, false);
         else if (button == 3) Player.onClick(id, true);
     });
     socket.on("gameEvent", (gameEvent) => {
         switch (gameEvent.type) {
-          case "takeDamage":
-            let targetPlayer = PlayerList.filter(playerObject => {
-                return playerObject.name === gameEvent.target.name;
-            })[0];
-            targetPlayer.takeDamage(gameEvent.data);
-            break;
-          case "getHealed":
+            case "takeDamage":
+                let targetPlayer = PlayerList.filter(playerObject => {
+                    return playerObject.name === gameEvent.target.name;
+                })[0];
+                targetPlayer.takeDamage(gameEvent.data);
+                break;
+            case "getHealed":
 
-            break;
-          case "loot":
+                break;
+            case "loot":
 
-            break;
-          default:
+                break;
+            default:
 
         }
     });
     socket.on("disconnect", () => {
-        PlayerList.splice(PlayerList.indexOf(Player),1);
+        PlayerList.splice(PlayerList.indexOf(Player), 1);
     });
 });
 
@@ -56,4 +56,4 @@ setInterval(() => {
         PlayerList,
         version
     });
-},1000/60); // how fast the game loop is
+}, 1000 / 60); // how fast the game loop is

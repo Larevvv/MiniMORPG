@@ -1,9 +1,8 @@
-
 class Player {
-    constructor(name) {
+    constructor(id) {
         // Player identifying
-        this.id = "0000-0000-0000-0000";
-        this.name = name;
+        this.id = id;
+        this.name = "name";
         //this.instanceId = 0;
 
         // combat
@@ -17,13 +16,16 @@ class Player {
         // Player stuff. Inventory etc.
         this.Inventory = {};
         this.equips = {
-            weapon1 : null,
-            weapon2 : null,
-            armor : null
+            weapon1: null,
+            weapon2: null,
+            armor: null
         };
 
         // Controls and position
-        this.pos = {x:0,y:0};
+        this.pos = {
+            x: 0,
+            y: 0
+        };
         this.speed = 5;
         this.keys = {
             up: false,
@@ -34,7 +36,7 @@ class Player {
         }
     }
 
-    takeDamage (amount) {
+    takeDamage(amount) {
         this.hp -= amount;
     }
 
@@ -45,7 +47,7 @@ class Player {
 
     keyDown(key) {
         this.keys[key] = true;
-        if (this.keys.space){
+        if (this.keys.space) {
             this.interact = !this.interact;
         }
     }
@@ -56,14 +58,15 @@ class Player {
 
     update() {
         // movement
-        let x=0,y=0;
-        if(this.keys.up) y-=1;
-        if(this.keys.down) y+=1;
-        if(this.keys.right) x+=1;
-        if(this.keys.left) x-=1;
-        const dist = Math.sqrt(Math.pow(x,2)+Math.pow(y,2));
-        this.pos.x += (x/dist||0)*this.speed;
-        this.pos.y += (y/dist||0)*this.speed;
+        let x = 0,
+            y = 0;
+        if (this.keys.up) y -= 1;
+        if (this.keys.down) y += 1;
+        if (this.keys.right) x += 1;
+        if (this.keys.left) x -= 1;
+        const dist = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+        this.pos.x += (x / dist || 0) * this.speed;
+        this.pos.y += (y / dist || 0) * this.speed;
     }
 }
 
