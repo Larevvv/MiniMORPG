@@ -23,7 +23,6 @@
                 transform: translate(-50%,-50%);
                 width: 32px;
                 height: 32px;
-                background-color: red;
                 top: 0;
                 left: 0;
                 z-index: 90;
@@ -43,6 +42,7 @@
                 width: 64px;
                 left: 50%;
                 transform: translateX(-50%);
+                pointer-events: none;
             }
             .player .hp .edgeleft {
                 height: 100%;
@@ -83,7 +83,7 @@
         </style>
     </head>
     <body>
-        <div id="Player" class="player">
+        <div id="Player" class="player rpgui-icon potion-red">
             <label class="info">AAAAAAAAAAAAAA</label>
             <div class="hp rpgui-progress red" data-value="0.5">
                 <div class="rpgui-progress-track fill">

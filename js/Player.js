@@ -2,7 +2,7 @@ class Player {
     constructor(id) {
         // Player identifying
         this.id = id;
-        this.name = "name";
+        this.name = id;
         //this.instanceId = 0;
 
         // Combat
