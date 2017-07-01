@@ -53,6 +53,7 @@ socket.on("update", data => {
                 cur.css("left", Player.pos.x);
                 cur.attr("con", 1);
                 // Combat
+                //console.log(Player.interact, Player.target)
                 if (Player.interact && Player.target) {
                     let target = data.PlayerList.filter((jsonPlayer) => {
                         return jsonPlayer.id === Player.target;
@@ -83,10 +84,9 @@ socket.on("update", data => {
                 nplr.css("left", Player.pos.x);
                 nplr.attr("con", 1);
                 // Adds a listener to player to be used in player targeting
-                nplr.click(event => {
-                    event.preventDefault();
-                    let name = $(event.currentTarget).attr("id");
-                    socket.emit("onClick", name, event.which);
+                nplr.on("click", event => {
+                    let id = $(event.currentTarget).attr("id");
+                    socket.emit("onClick", id, event.which);
                 });
                 nplr.appendTo(Players);
             }
