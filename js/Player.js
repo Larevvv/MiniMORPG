@@ -1,8 +1,14 @@
-class Player {
+var entity = require('./worldItems/entity.js');
+
+class Player extends entity{
     constructor(id) {
+        super(id, "name", {
+            x:0,
+            y:0
+        });
         // Player identifying
-        this.id = id;
-        this.name = "name";
+        //this.id = id;
+        //this.name = "name";
         //this.instanceId = 0;
 
         // combat
@@ -14,7 +20,7 @@ class Player {
         this.target = "";
 
         // Player stuff. Inventory etc.
-        this.Inventory = {};
+        this.Inventory = [];
         this.equips = {
             weapon1: null,
             weapon2: null,
@@ -22,10 +28,11 @@ class Player {
         };
 
         // Controls and position
-        this.pos = {
-            x: 0,
-            y: 0
-        };
+        //this.pos = {
+        //    x: 0,
+        //    y: 0
+        //};
+
         this.speed = 5;
         this.keys = {
             up: false,

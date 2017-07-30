@@ -8,44 +8,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.2/socket.io.js"></script>
         <link href="rpgui/rpgui.min.css" rel="stylesheet" type="text/css">
         <script src="rpgui/rpgui.min.js"></script>
-        <style media="screen">
-            body {
-                overflow: hidden;
-                width: 100vw;
-                height: 100vh;
-                transform: translate(50%,50%);
-                margin: 0;
-            }
-            .playerList {
-                position: absolute;
-            }
-            .player {
-                position: absolute;
-                transform: translate(-50%,-50%);
-                width: 32px;
-                height: 32px;
-                background-color: red;
-                top: 0;
-                left: 0;
-                z-index: 90;
-            }
-            .rpgui-content {
-                transform: translate(-50%,-50%);
-            }
-            .health {
-                position: absolute;
-                transform: translate(-50%);
-                left: 50%;
-                bottom: 0;
-
-                z-index: 100;
-                width: 300px;
-            }
-        </style>
+        <link href="./style_screen.css" rel="stylesheet" type="text/css" media="screen">
     </head>
     <body>
         <div id="Player" class="player"></div>
         <div id="playerList"></div>
+        <div id="inventory" class="rpgui-container rpgui-draggable"></div>
         <div class="rpgui-content">
             <div id="hp-bar" class="health rpgui-progress red" data-value="0.5"></div>
         </div>

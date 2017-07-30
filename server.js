@@ -57,3 +57,5 @@ setInterval(() => {
         version
     });
 }, 1000 / 60); // how fast the game loop is
+
+console.log("Server up");
