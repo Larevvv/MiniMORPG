@@ -23,6 +23,10 @@ const keys = {
     "32": {
         name: "space",
         value: false
+    },
+    "66": {
+        name: "backpack",
+        value: false
     }
 }
 
@@ -37,6 +41,40 @@ document.addEventListener("keyup", event => {
     if (key && keys[event.keyCode].value) socket.emit("keyUpdate", key.name, false);
     if (key) keys[event.keyCode].value = false;
 });
+
+function processGameEvent(gameEvents) {
+    // TODO: Process
+    if(!gameEvents || gameEvents.length > 0){
+        return;
+    }
+    for(let i=0; i<gameEvents.length; i++){
+        console.log(gameEvents);
+        switch (gameEvents[i].type) {
+            case "inventory":
+                // TODO: inventory
+                let inventory = $('#inventory');
+                console.log("doing it");
+                inventory.attr("enabled", false);
+                for(let i=0;i<gameEvents.data.length;i++) {
+                    switch (gameEvents.data[i].type) {
+                        case "weapon":
+                            classString = "rpgui-icon sword";
+                            break;
+                        default:
+                            classString = "rpgui-icon potion-red";
+                    }
+                    jQuery('<div/>', {
+                        id: gameEvents.data[i].id,
+                        class: classString
+                    }).appendTo(inventory);
+
+                }
+                break;
+            default:
+
+        }
+    }
+}
 
 let version = null;
 socket.on("update", data => {
@@ -92,5 +130,6 @@ socket.on("update", data => {
             }
         });
         Players.find("[con=0]").remove();
+        processGameEvent(data.gameEvents);
     }
 });

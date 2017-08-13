@@ -49,11 +49,22 @@ io.on("connection", socket => {
 
 // Game loop
 setInterval(() => {
+    let gameEvents = [];
     PlayerList.forEach(Player => {
-        Player.update();
-    })
+        let playerEvents = Player.update();
+        if(playerEvents && playerEvents.length > 0){
+            playerEvents.forEach(playerEvent => {
+                if(playerEvent.target === "all"){
+                    gameEvents.push(playerEvent);
+                } else {
+                    io.client[playerEvent.target].send(playerEvent);
+                }
+            });
+        }
+    });
     io.emit("update", {
         PlayerList,
+        gameEvents,
         version
     });
 }, 1000 / 60); // how fast the game loop is

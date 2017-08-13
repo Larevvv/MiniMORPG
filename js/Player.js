@@ -10,6 +10,8 @@ class Player extends entity{
         //this.id = id;
         //this.name = "name";
         //this.instanceId = 0;
+        this.activateEvent = false;
+        this.gameEvent = [];
 
         // combat
         this.maxHP = 100;
@@ -20,7 +22,15 @@ class Player extends entity{
         this.target = "";
 
         // Player stuff. Inventory etc.
-        this.Inventory = [];
+        this.inventory = [
+            {
+                id: "asdiasdo",
+                type: "weapon"
+            }, {
+                id: "asdia",
+                type: "something"
+            }
+        ];
         this.equips = {
             weapon1: null,
             weapon2: null,
@@ -39,6 +49,7 @@ class Player extends entity{
             down: false,
             left: false,
             right: false,
+            backpack: false,
             space: false
         }
     }
@@ -56,6 +67,12 @@ class Player extends entity{
         this.keys[key] = true;
         if (this.keys.space) {
             this.interact = !this.interact;
+        } else if (this.keys.backpack) {
+            this.gameEvent.push({
+                "type": "inventory",
+                "target": this.id,
+                "data": this.inventory
+            });
         }
     }
 
@@ -74,6 +91,12 @@ class Player extends entity{
         const dist = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
         this.pos.x += (x / dist || 0) * this.speed;
         this.pos.y += (y / dist || 0) * this.speed;
+        if (this.gameEvent) {
+
+        }
+        let returnEvent = this.gameEvent;
+        this.gameEvent = [];
+        return returnEvent;
     }
 }
 

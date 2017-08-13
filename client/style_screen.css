@@ -2,31 +2,39 @@ body {
     overflow: hidden;
     width: 100vw;
     height: 100vh;
-    transform: translate(50%,50%);
+    /*transform: translate(100%,100%);*/
     margin: 0;
 }
 .playerList {
-    position: absolute;
+    position: fixed;
 }
 .player {
+    transform: translate(50vw, 50vh);
     position: absolute;
-    transform: translate(-50%,-50%);
     width: 32px;
     height: 32px;
     background-color: red;
-    top: 0;
-    left: 0;
+    top: 0px;
+    left: 0px;
     z-index: 90;
 }
 .rpgui-content {
-    transform: translate(-50%,-50%);
+    /*transform: translate(-50%,-50%);*/
 }
+
+#inventory {
+    width: 128px;
+    height: 128px;
+    background-color: grey;
+    bottom: 5vh;
+    right: 5vw;
+}
+
 .health {
     position: absolute;
     transform: translate(-50%);
     left: 50%;
     bottom: 0;
-
     z-index: 100;
     width: 300px;
 }
